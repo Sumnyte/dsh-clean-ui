@@ -55,19 +55,53 @@ dsh plugin --profile desktop add link:<本仓库绝对路径>
 dsh plugin --profile desktop remove dsh-line-height
 ```
 
-### 可调参数
+### 可调参数（CONFIG）
 
-所有值都写死在 `lib/client.js` 里，搜索对应函数即可：
+所有开关集中在 `lib/client.js` 顶部的 `CONFIG` 对象里，改完重启 DSH 生效：
 
-| 想改什么 | 位置 | 默认值 |
-|---|---|---|
-| 侧栏字号 | `enlargeSidebar()` | `16px` |
-| 标题字号 | `enlargeHeaderTitle()` | `17px` |
-| 顶部栏内容下移量 | `shiftHeaderContent()` | `padding-top: 14px` |
-| tab 垂直微调 | `styleTabs()` | `+ 4` |
-| 正文最大宽度 / 比例 | `widenColumn()` | `1400` / `0.96` |
-| 顶沿羽化范围 | `ensureTopFade()` | `-16` / `+46` |
-| 碰撞判定余量 | `syncTabCollision()` | `stripLeft - 4` |
+```js
+var CONFIG = {
+  lineHeight: 1.75,          // 正文行高
+  bodyWeight: 350,           // 正文/列表/表格字重
+  headingWeight: 500,        // 标题字重（默认 700）
+  strongWeight: 500,         // 加粗字重
+
+  headerHeight: 50,          // 顶部栏高度 px
+  titleSize: 17,             // 会话标题字号 px
+  headerPaddingTop: 14,      // 顶部栏内容整体下移 px
+  tabOffsetY: 4,             // tab 条额外垂直微调 px
+
+  tabFontSize: 14,           // tab 字号 px
+  tabColor: "#5b6169",       // tab 常态颜色
+  barHeight: 4,              // 滑动指示条高度 px
+  tabRise: 6,                // 浮现时上浮距离 px
+
+  sidebarFontSize: 16,       // 左侧栏字号 px
+
+  columnMaxWidth: 1400,      // 正文列最大宽度 px
+  columnRatio: 0.96,         // 正文列占父宽比例
+
+  featherStart: -16,         // 顶沿羽化：相对 header 底边的起点 px
+  featherEnd: 46,            // 羽化终点 px
+
+  composerGap: 18,           // 输入卡下方留白 px
+
+  features: {
+    hoverTabs: true,         // 平时隐藏 tab，悬停 header 才浮现
+    hideOnCollision: true,   // 与标题将碰撞时淡出 tab
+    feather: true,           // 顶沿羽化
+    widerColumn: true,       // 加宽正文列
+    sidebarFont: true,       // 放大侧栏字号
+    hideStats: true,         // 隐藏输入框下方 tok/s 状态行
+    hideHeaderButtons: true, // 隐藏「展开底部面板」「上下文诊断」
+    hidePtcChip: true,       // 隐藏「PTC 模式」等徽章
+    hideViewMore: true,      // 隐藏会话视图「更多」
+    hideMoreNav: true        // 隐藏 rc.3 侧栏「更多」
+  }
+};
+```
+
+不想要某个效果，把对应的 `features` 开关设成 `false` 即可；想调数值就改上面的常量。
 
 ### 兼容性
 
