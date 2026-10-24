@@ -11,7 +11,7 @@
 > DOM-level theme, so a host redesign can break individual features silently. Read
 > [兼容性](#兼容性) before installing.
 
-**一句话**：把 DSH 的 Web GUI 收紧一档——更紧凑的顶栏、悬停才出现的 tab、可调排版和输入区、
+把 DSH 的 Web GUI 收紧一档——更紧凑的顶栏、悬停才出现的 tab、可调排版和输入区、
 可逐项隐藏的右上角按钮与底部状态行，并带「默认 / 作者 / 自定义」预设。
 
 **主要功能**
