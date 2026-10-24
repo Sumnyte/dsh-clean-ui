@@ -1,23 +1,39 @@
 # dsh-line-height
 
 > A small, opinionated **client-side theme plugin** for the DeepSeek Harness (DSH) Web GUI:
-> tighter conversation chrome, calmer typography, and a hover-driven tab indicator.
+> tighter conversation chrome, calmer typography, a hover-driven tab indicator, and a
+> configurable composer status row — with **presets** for the stock look, the author's look,
+> or your own tuning.
 
 [中文说明](#中文说明) · [English](#english)
+
+> **Status: 0.2.x beta.** Built and tested against DSH `0.2.1-rc.3` on Windows. It is a
+> DOM-level theme, so a host redesign can break individual features silently. Read
+> [兼容性](#兼容性) before installing.
+
+![Composer footer with the selectable status row](docs/composer.png)
+![Live tuning panel with presets](docs/panel.png)
 
 ---
 
 ## 中文说明
 
 这是一个**纯前端**的 DSH 插件：宿主半边是空函数，所有效果都在 `lib/client.js` 里，通过一个
-`<style>` 标签 + 若干次受控的 DOM 调整实现。
+`<style>` 标签 + 若干次受控的 DOM 调整实现。没有依赖、没有构建步骤，也不发网络请求。
 
 ### 它做了什么
 
+**预设**
+
+- **默认外观**：插件完全不动样式，只保留 `Ctrl+Alt+L` 面板——相当于"恢复用户原来的样子"
+- **作者预设**：作者调过的一整套参数（42px 顶栏、1.65 行高、280 字重、980px 正文列等）
+- **自定义**：你在面板里拖出来的参数；拖任意滑块后自动归到这里
+- 切换预设会刷新一次页面（见[已知限制](#已知限制)）
+
 **排版**
 
-- 对话正文 `line-height: 1.75`，段落/列表间距放宽
-- 正文 350 字重、标题与加粗 500 字重（默认 700 在 MiSans/思源系中偏"糊"）
+- 对话正文行高、正文字重、标题字重、加粗字重都可调（默认 1.75 / 350 / 500 / 500）
+- 段落/列表间距放宽
 
 **顶部栏**
 
@@ -25,20 +41,21 @@
 - 四个视图 tab 平时隐藏，鼠标移入 header 才浮现（淡入 + 上浮 6px）
 - 当前 tab 用一条 4px 圆角蓝条指示：从中间伸长、在 tab 间滑动、移开时缩回
 - 四个 tab 水平垂直居中；窗口变窄到会和标题碰撞时自动淡出（按实测像素判定，不是固定断点）
-- 隐藏「更多会话视图」按钮、rc.3 新增的侧栏「更多」项、「展开底部面板」「上下文诊断」两个按钮
+- 隐藏「更多会话视图」按钮、rc.3 新增的侧栏「更多」项、「展开底部面板」「上下文诊断」两个按钮，
+  以及「在文件资源管理器中打开 / 更多打开方式」这组顶部工具
 
 **侧栏 / 输入区**
 
 - 左侧栏文字统一 16px（导航、工作区、会话标题、时间戳）
-- 输入框底部的状态行（tok/s、缓存命中、上下文占比）可以整行隐藏，也可以只保留其中任意几项；
-  默认隐藏整行，面板里取消「隐藏整行」后逐项勾选
-- 输入卡下方留 18px 间距
-- 对话正文列加宽到 `min(1400px, 父宽 × 0.96)`
+- 输入框底部的状态行（tok/s、缓存命中、上下文占比）可以整行隐藏，也可以只保留其中任意几项
+- 显示状态行时，它上下留白由**一个**参数控制并保持对称；隐藏时用另一个参数控制输入卡到底部的距离
+- 对话正文列可调宽（最大宽度 + 占父宽比例）
 
 ### 安装
 
 ```sh
-dsh plugin --profile desktop add github:<你的用户名>/dsh-line-height
+# 需要先按 DSH 的插件方式安装（把 <owner> 换成仓库地址）
+dsh plugin --profile desktop add github:<owner>/dsh-line-height
 ```
 
 或本地链接安装（改代码即时生效，但**需要重启 DSH**）：
@@ -47,8 +64,8 @@ dsh plugin --profile desktop add github:<你的用户名>/dsh-line-height
 dsh plugin --profile desktop add link:<本仓库绝对路径>
 ```
 
-> **重要**：客户端插件在 **DSH 启动时构建**。改完代码必须**完全退出 DSH（含托盘）再打开**，
-> `Ctrl+Shift+R` 只能偶尔生效。
+> **重要**：客户端插件在 **DSH 启动时构建**。装完/更新后请**完全退出 DSH（含托盘）再打开**。
+> 版本、平台与已验证的宿主组合见[兼容性](#兼容性)。
 
 ### 卸载
 
@@ -62,6 +79,8 @@ dsh plugin --profile desktop remove dsh-line-height
 
 ```js
 var CONFIG = {
+  preset: "custom",          // "stock" | "author" | "custom"
+
   lineHeight: 1.75,          // 正文行高
   bodyWeight: 350,           // 正文/列表/表格字重
   headingWeight: 500,        // 标题字重（默认 700）
@@ -110,9 +129,15 @@ var CONFIG = {
 不想要某个效果，把对应的 `features` 开关设成 `false` 即可；想调数值就改上面的常量。
 
 常用开关不必改代码：在 GUI 里按 **`Ctrl+Alt+L`** 打开浮动面板，拖动滑块 / 勾选复选框即时生效；
-配置保存在本机 `localStorage`，刷新后仍在。状态行那一段就是：
+配置保存在本机 `localStorage`。面板顶部是**预设**行：
 
-- ☑ 隐藏整行 —— 勾上就整行隐藏（默认）
+- **默认外观** —— 插件不做任何改动（只保留这个面板），等于安装前的 DSH
+- **作者预设** —— 作者调过的一整套参数（42px 顶栏、1.65 行高、280 字重、980px 正文列……）
+- **自定义** —— 你自己的参数；拖动任意滑块后会自动归到这里
+
+切换预设会刷新页面，因为只有重载才能干净地撤掉已经写进 DOM 的内联样式。状态行那一段是：
+
+- ☑ 隐藏整行 —— 勾上就整行隐藏（作者预设默认隐藏）
 - 不隐藏时显示：`输出速度 tok/s`、`缓存命中率`、`上下文占比`，任选若干项；
   三项全部不勾等于隐藏整行
 - 状态行上下留白 —— 显示状态行时的单参数滑块：它上面（与输入卡之间）和下面（到窗口底）
@@ -121,17 +146,23 @@ var CONFIG = {
 
 ### 兼容性
 
-- 在 **DSH 0.2.1-rc.3 / Windows / 浅色与深色主题**下开发与验证
-- 依赖的是**几何测量**（`getBoundingClientRect` / `Range`）而不是哈希类名，所以小版本升级通常不会失效
-- 但如果上游大改 DOM 结构，某些功能可能静默失效（不会报错，也不会卡死）
+- **已验证**：DSH `0.2.1-rc.3`（Electron 44）/ Windows 11 / 浅色 + 深色主题；同时启用
+  `dsh-ops`、`dshmarket`、`dsh-better-sidebar`、`dsh-context`、`wallpaper-engine` 做过联调
+- **未验证**：其它 DSH 版本、macOS、Linux、英文/其它语言界面
+- 插件靠宿主 DOM 工作：`data-slot`、`data-composer-*`、`data-conversation-*` 等属性，
+  以及 `_markdown_`、`headerActions`、`headerUtilities`、`_split` 等类名后缀。宿主改结构或改文案时，
+  对应功能可能**静默失效**（不会报错，也不会卡住页面）
+- 隐藏「展开底部面板」「文件资源管理器」这类按钮是按**中文可访问名**匹配的；非中文界面可能不生效
+- 状态行依赖宿主的两块统计（`activity` / `usage`）和末尾的上下文占用环；宿主调整统计结构时会失效
 
 ### 已知限制
 
+- 切换预设、以及"恢复默认"会**刷新页面**；这是移除内联样式最可靠的方式
+- 中途禁用插件不会自动撤销已经写进 DOM 的内联样式，需要刷新页面/重启后才会恢复宿主原样
 - 「标准模式」徽章和某些 tab 悬停底色由宿主自己的渲染层绘制，**不在页面 DOM 内**，插件无法隐藏
-- 隐藏行为是"按可访问名/位置"判定的，上游改文案时可能失效
-- 侧栏「更多」由 `features.hideMoreNav` 控制（默认开；本机配置为 `false` 时保持显示，不在面板里）
 - 浮动面板只覆盖常用项；其余常量仍需改 `lib/client.js` 后重启
-- 状态行按宿主的两块统计（`activity` / `usage`）加末尾的上下文占用环判定，宿主改结构时可能失效
+- 侧栏「更多」由 `features.hideMoreNav` 控制（默认开，不在面板里；作者预设为关闭）
+- 面板文案目前只有中文
 
 ### 安全说明
 
@@ -144,7 +175,19 @@ var CONFIG = {
 
 A client-only DSH plugin that restyles the Web GUI conversation chrome: compact 50px header,
 hover-revealed view tabs with a sliding indicator strip, feathered top edge, calmer markdown
-typography, a wider transcript column, 16px sidebar labels, and a trimmed composer footer.
+typography, a configurable transcript column, 16px sidebar labels, and a selectable composer
+status row — with **presets** for the stock look, the author's look, or your own tuning.
+
+**Status: 0.2.x beta.** Built and tested against DSH `0.2.1-rc.3` on Windows only. This is a
+DOM-level theme; a host redesign can break individual features silently.
+
+**Presets** (panel: `Ctrl+Alt+L`)
+
+- **默认外观 / Stock** — the plugin does nothing (panel only); this is the pre-install DSH look
+- **作者预设 / Author** — the tuned snapshot the plugin was built with (42px header, 1.65 line
+  height, 280 body weight, 980px transcript, etc.)
+- **自定义 / Custom** — your own values; moving any slider switches to this
+- Switching presets reloads the page: only a reload removes every inline tweak cleanly
 
 **Install**
 
@@ -160,15 +203,22 @@ dsh plugin --profile desktop add github:<you>/dsh-line-height
 dsh plugin --profile desktop remove dsh-line-height
 ```
 
-**Notes**
+**Compatibility and limits**
 
-- Tested on DSH `0.2.1-rc.3` (Windows, light and dark themes).
-- The composer status row (tok/s, cache hit, context usage) can be hidden as a whole, or trimmed to any
-  subset of its three items. Open the live panel with **`Ctrl+Alt+L`**, untick "隐藏整行", then tick the
-  items to keep (nothing ticked also hides the row). Settings persist in `localStorage`.
-- Uses geometry-based DOM matching (no hashed class names), so minor updates usually keep working.
-- Injects one `<style>` tag and toggles inline styles only — no network access, no conversation data.
+- Verified: DSH `0.2.1-rc.3` (Electron 44) / Windows 11 / light and dark themes, together with
+  `dsh-ops`, `dshmarket`, `dsh-better-sidebar`, `dsh-context` and `wallpaper-engine`.
+- Not verified: other DSH versions, macOS, Linux, non-Chinese UI.
+- The theme relies on host DOM attributes (`data-slot`, `data-composer-*`, `data-conversation-*`)
+  and a few class-name suffixes (`_markdown_`, `headerActions`, `headerUtilities`, `_split`).
+  When the host changes structure or copy, features can stop silently (no errors, no freeze).
+- Several hide rules match **Chinese accessible names**, so they may not apply in other locales.
+- Disabling the plugin mid-session does not undo the inline tweaks it already wrote; reload/restart
+  to get the host look back. The **Stock** preset is the supported way to do that.
 - Some host-rendered chrome (the "standard mode" badge, tab hover pill) lives outside the page DOM
   and cannot be hidden from a plugin.
+- The panel copy is Chinese-only for now.
+
+**Privacy:** injects one `<style>` tag and toggles inline styles only — no network access, no
+conversation data is read or uploaded.
 
 MIT Licensed.
