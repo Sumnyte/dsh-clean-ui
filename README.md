@@ -22,7 +22,7 @@
 - **模式徽章**：`PTC 模式` / `创造模式` / `标准模式` / 后台任务徽章可显示/隐藏，15px，tab 浮现时渐隐
 - **预设**：默认外观（完全不动样式）/ 作者预设 / 自定义；`Ctrl+Alt+L` 打开实时调参面板，配置存本机
 
-![Header tabs with the thin 2px indicator](docs/header.png)
+![整体效果：浅色主题、隐藏 tab 时的 header 与输入区](docs/overview.png)
 
 ---
 
@@ -57,6 +57,8 @@
 
 > **tab 来源**：`对话` / `轨迹` 由 DSH 自带；`上下文` / `编队` 是 **`dsh-context`** 插件注册的。
 > 本插件只负责把整条 tab 条隐藏/浮现，不区分 tab 来自哪个插件；没装 `dsh-context` 时自然只会看到前两个。
+
+![tab 条悬停时浮现：对话/轨迹/上下文/编队 + 2px 蓝条](docs/tabs.png)
 
 **侧栏 / 输入区**
 
