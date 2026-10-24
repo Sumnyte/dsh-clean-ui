@@ -30,7 +30,8 @@
 **侧栏 / 输入区**
 
 - 左侧栏文字统一 16px（导航、工作区、会话标题、时间戳）
-- 隐藏输入框底部的 tok/s / 缓存命中 / 上下文百分比状态行
+- 输入框底部的状态行（tok/s、缓存命中、上下文占比）可以整行隐藏，也可以只保留其中任意几项；
+  默认隐藏整行，面板里取消「隐藏整行」后逐项勾选
 - 输入卡下方留 18px 间距
 - 对话正文列加宽到 `min(1400px, 父宽 × 0.96)`
 
@@ -86,13 +87,17 @@ var CONFIG = {
 
   composerGap: 18,           // 输入卡下方留白 px
 
+  /* 底部状态行：features.hideStats = true 时整行隐藏；否则只显示
+     stats 里勾选的项，三项全不选也等于隐藏整行。 */
+  stats: { speed: true, cache: true, context: true },
+
   features: {
     hoverTabs: true,         // 平时隐藏 tab，悬停 header 才浮现
     hideOnCollision: true,   // 与标题将碰撞时淡出 tab
     feather: true,           // 顶沿羽化
     widerColumn: true,       // 加宽正文列
     sidebarFont: true,       // 放大侧栏字号
-    hideStats: true,         // 隐藏输入框下方 tok/s 状态行
+    hideStats: true,         // 隐藏整行底部状态行
     hideHeaderButtons: true, // 隐藏「展开底部面板」「上下文诊断」
     hidePtcChip: true,       // 隐藏「PTC 模式」等徽章
     hideViewMore: true,      // 隐藏会话视图「更多」
@@ -102,6 +107,13 @@ var CONFIG = {
 ```
 
 不想要某个效果，把对应的 `features` 开关设成 `false` 即可；想调数值就改上面的常量。
+
+常用开关不必改代码：在 GUI 里按 **`Ctrl+Alt+L`** 打开浮动面板，拖动滑块 / 勾选复选框即时生效；
+配置保存在本机 `localStorage`，刷新后仍在。状态行那一段就是：
+
+- ☑ 隐藏整行 —— 勾上就整行隐藏（默认）
+- 不隐藏时显示：`输出速度 tok/s`、`缓存命中率`、`上下文占比`，任选若干项；
+  三项全部不勾等于隐藏整行
 
 ### 兼容性
 
@@ -113,7 +125,8 @@ var CONFIG = {
 
 - 「标准模式」徽章和某些 tab 悬停底色由宿主自己的渲染层绘制，**不在页面 DOM 内**，插件无法隐藏
 - 隐藏行为是"按可访问名/位置"判定的，上游改文案时可能失效
-- 没有提供设置界面：所有开关都是代码里的常量
+- 浮动面板只覆盖常用项；其余常量仍需改 `lib/client.js` 后重启
+- 状态行按宿主的两块统计（`activity` / `usage`）加末尾的上下文占用环判定，宿主改结构时可能失效
 
 ### 安全说明
 
@@ -145,6 +158,9 @@ dsh plugin --profile desktop remove dsh-line-height
 **Notes**
 
 - Tested on DSH `0.2.1-rc.3` (Windows, light and dark themes).
+- The composer status row (tok/s, cache hit, context usage) can be hidden as a whole, or trimmed to any
+  subset of its three items. Open the live panel with **`Ctrl+Alt+L`**, untick "隐藏整行", then tick the
+  items to keep (nothing ticked also hides the row). Settings persist in `localStorage`.
 - Uses geometry-based DOM matching (no hashed class names), so minor updates usually keep working.
 - Injects one `<style>` tag and toggles inline styles only — no network access, no conversation data.
 - Some host-rendered chrome (the "standard mode" badge, tab hover pill) lives outside the page DOM
