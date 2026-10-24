@@ -1,4 +1,4 @@
-# dsh-clean-ui · DSH 简洁界面
+# dsh-clean-ui · DSH 简洁与优化界面
 
 > A small, opinionated **client-side theme plugin** for the DeepSeek Harness (DSH) Web GUI:
 > tighter conversation chrome, calmer typography, a hover-driven tab indicator, and a
@@ -11,8 +11,8 @@
 > DOM-level theme, so a host redesign can break individual features silently. Read
 > [兼容性](#兼容性) before installing.
 
-![Composer footer with the selectable status row](docs/composer.png)
-![Live tuning panel with presets](docs/panel.png)
+![Header tabs with the thin 2px indicator](docs/header.png)
+![Live tuning panel: presets, top-button switches, sliders](docs/panel.png)
 
 ---
 
@@ -38,11 +38,16 @@
 **顶部栏**
 
 - 高度压到 50px，去掉底部分界线，改用 `mask-image` 让内容在顶沿渐隐（深浅色通用）
-- 四个视图 tab 平时隐藏，鼠标移入 header 才浮现（淡入 + 上浮 6px）
-- 当前 tab 用一条 4px 圆角蓝条指示：从中间伸长、在 tab 间滑动、移开时缩回
-- 四个 tab 水平垂直居中；窗口变窄到会和标题碰撞时自动淡出（按实测像素判定，不是固定断点）
-- 隐藏「更多会话视图」按钮、rc.3 新增的侧栏「更多」项、「展开底部面板」「上下文诊断」两个按钮，
-  以及「在文件资源管理器中打开 / 更多打开方式」这组顶部工具
+- 视图 tab 平时隐藏，鼠标移入 header 才浮现（淡入 + 上浮 6px）
+- 当前 tab 用一条 **2px** 圆角蓝条指示：从中间伸长、在 tab 间滑动、移开时缩回
+- tab 水平垂直居中；窗口变窄到会和标题碰撞时自动淡出（按实测像素判定，不是固定断点）
+- 右上角五个工具按钮（`更多操作`、`打开右侧边栏`、`分栏`、`全屏`、`收起右侧边栏`）可**逐项**
+  勾选显示/隐藏，像底部状态行一样；另有总开关隐藏「展开底部面板」「上下文诊断」两个按钮
+- 隐藏「更多会话视图」按钮、rc.3 新增的侧栏「更多」项，以及「在文件资源管理器中打开 /
+  更多打开方式」这组顶部工具
+
+> **tab 来源**：`对话` / `轨迹` 由 DSH 自带；`上下文` / `编队` 是 **`dsh-context`** 插件注册的。
+> 本插件只负责把整条 tab 条隐藏/浮现，不区分 tab 来自哪个插件；没装 `dsh-context` 时自然只会看到前两个。
 
 **侧栏 / 输入区**
 
@@ -50,6 +55,7 @@
 - 输入框底部的状态行（tok/s、缓存命中、上下文占比）可以整行隐藏，也可以只保留其中任意几项
 - 显示状态行时，它上下留白由**一个**参数控制并保持对称；隐藏时用另一个参数控制输入卡到底部的距离
 - 对话正文列可调宽（最大宽度 + 占父宽比例）
+- **输入框与正文同宽**：输入卡的最大宽度跟随正文列实时测量，两者边缘对齐；可在面板里关掉
 
 ### 安装
 
@@ -93,7 +99,7 @@ var CONFIG = {
 
   tabFontSize: 14,           // tab 字号 px
   tabColor: "#5b6169",       // tab 常态颜色
-  barHeight: 4,              // 滑动指示条高度 px
+  barHeight: 2,              // 滑动指示条高度 px
   tabRise: 6,                // 浮现时上浮距离 px
 
   sidebarFontSize: 16,       // 左侧栏字号 px
@@ -111,6 +117,9 @@ var CONFIG = {
      stats 里勾选的项，三项全不选也等于隐藏整行。 */
   stats: { speed: true, cache: true, context: true },
 
+  /* 右上角五个工具按钮：true = 显示，false = 隐藏 */
+  topButtons: { more: true, sidebar: true, split: true, full: true, collapse: true },
+
   features: {
     hoverTabs: true,         // 平时隐藏 tab，悬停 header 才浮现
     hideOnCollision: true,   // 与标题将碰撞时淡出 tab
@@ -121,7 +130,8 @@ var CONFIG = {
     hideHeaderButtons: true, // 隐藏「展开底部面板」「上下文诊断」
     hidePtcChip: true,       // 隐藏「PTC 模式」等徽章
     hideViewMore: true,      // 隐藏会话视图「更多」
-    hideMoreNav: true        // 隐藏 rc.3 侧栏「更多」
+    hideMoreNav: true,       // 隐藏 rc.3 侧栏「更多」
+    composerWidth: true      // 输入卡与正文列同宽
   }
 };
 ```
@@ -144,6 +154,12 @@ var CONFIG = {
   的留白保持相等（默认 12px，可 0–40）
 - 隐藏时下留白 —— 隐藏状态行时输入卡到底部的距离（默认 8px，可 0–30）
 
+**顶部按钮**那一段是逐项开关（勾选 = 显示）：
+
+- `更多操作`、`打开右侧边栏`、`分栏`、`全屏`、`收起右侧边栏`
+- 全部可以只留其中几个；隐藏「打开右侧边栏」后，仍可用 `Ctrl+Alt+L` 打开面板把它勾回来
+- `分栏` / `全屏` / `收起右侧边栏` 来自右侧栏的 chrome，只在右侧栏打开时出现
+
 ### 兼容性
 
 - **已验证**：DSH `0.2.1-rc.3`（Electron 44）/ Windows 11 / 浅色 + 深色主题；同时启用
@@ -152,7 +168,7 @@ var CONFIG = {
 - 插件靠宿主 DOM 工作：`data-slot`、`data-composer-*`、`data-conversation-*` 等属性，
   以及 `_markdown_`、`headerActions`、`headerUtilities`、`_split` 等类名后缀。宿主改结构或改文案时，
   对应功能可能**静默失效**（不会报错，也不会卡住页面）
-- 隐藏「展开底部面板」「文件资源管理器」这类按钮是按**中文可访问名**匹配的；非中文界面可能不生效
+- 右上角五个按钮和「展开底部面板」「文件资源管理器」这类隐藏都按**中文可访问名**匹配；非中文界面可能不生效
 - 状态行依赖宿主的两块统计（`activity` / `usage`）和末尾的上下文占用环；宿主调整统计结构时会失效
 
 ### 已知限制
@@ -174,9 +190,10 @@ var CONFIG = {
 ## English
 
 A client-only DSH plugin that restyles the Web GUI conversation chrome: compact 50px header,
-hover-revealed view tabs with a sliding indicator strip, feathered top edge, calmer markdown
-typography, a configurable transcript column, 16px sidebar labels, and a selectable composer
-status row — with **presets** for the stock look, the author's look, or your own tuning.
+hover-revealed view tabs with a thin 2px sliding indicator, feathered top edge, calmer markdown
+typography, a transcript column with a matching composer width, 16px sidebar labels, a selectable
+composer status row and per-button header utilities — with **presets** for the stock look, the
+author's look, or your own tuning.
 
 **Status: 0.2.x beta.** Built and tested against DSH `0.2.1-rc.3` on Windows only. This is a
 DOM-level theme; a host redesign can break individual features silently.
@@ -188,6 +205,17 @@ DOM-level theme; a host redesign can break individual features silently.
   height, 280 body weight, 980px transcript, etc.)
 - **自定义 / Custom** — your own values; moving any slider switches to this
 - Switching presets reloads the page: only a reload removes every inline tweak cleanly
+
+**Header, tabs and composer**
+
+- The five top-right utilities — `更多操作`, `打开右侧边栏`, `分栏`, `全屏`, `收起右侧边栏` —
+  each have a show/hide checkbox in the panel.
+- Tabs: `对话` / `轨迹` are DSH's own; `上下文` / `编队` are registered by **`dsh-context`**.
+  The hover-hide applies to the whole strip, third-party tabs included; without dsh-context only
+  the first two exist.
+- The composer card is measured against the transcript column and kept at the same width; the
+  panel has an "输入框与正文同宽" toggle.
+- The tab indicator is 2px (tunable via `barHeight`).
 
 **Install**
 
