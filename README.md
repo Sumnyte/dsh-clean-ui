@@ -1,4 +1,4 @@
-# dsh-line-height
+# dsh-clean-ui · DSH 简洁界面
 
 > A small, opinionated **client-side theme plugin** for the DeepSeek Harness (DSH) Web GUI:
 > tighter conversation chrome, calmer typography, a hover-driven tab indicator, and a
@@ -55,7 +55,7 @@
 
 ```sh
 # 需要先按 DSH 的插件方式安装
-dsh plugin --profile desktop add github:Sumnyte/dsh-line-height
+dsh plugin --profile desktop add github:Sumnyte/dsh-clean-ui
 ```
 
 或本地链接安装（改代码即时生效，但**需要重启 DSH**）：
@@ -70,7 +70,7 @@ dsh plugin --profile desktop add link:<本仓库绝对路径>
 ### 卸载
 
 ```sh
-dsh plugin --profile desktop remove dsh-line-height
+dsh plugin --profile desktop remove dsh-clean-ui
 ```
 
 ### 可调参数（CONFIG）
@@ -192,7 +192,7 @@ DOM-level theme; a host redesign can break individual features silently.
 **Install**
 
 ```sh
-dsh plugin --profile desktop add github:Sumnyte/dsh-line-height
+dsh plugin --profile desktop add github:Sumnyte/dsh-clean-ui
 ```
 
 **Restart DSH fully** (tray → quit) after installing or editing — client plugins are bundled at startup.
@@ -200,7 +200,7 @@ dsh plugin --profile desktop add github:Sumnyte/dsh-line-height
 **Uninstall**
 
 ```sh
-dsh plugin --profile desktop remove dsh-line-height
+dsh plugin --profile desktop remove dsh-clean-ui
 ```
 
 **Compatibility and limits**

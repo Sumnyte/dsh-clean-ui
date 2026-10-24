@@ -1,4 +1,4 @@
-# dsh-line-height: client-only CSS tweak, host half is a no-op.
+# dsh-clean-ui: client-only UI theme, host half is a no-op.
 - insert:
-    - id: dsh-line-height
-      name: 'dsh-line-height'
+    - id: dsh-clean-ui
+      name: 'dsh-clean-ui'
