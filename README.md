@@ -100,7 +100,7 @@ var CONFIG = {
   barHeight: 2,              // 滑动指示条高度 px
   tabRise: 6,                // 浮现时上浮距离 px
   modeFontSize: 15,          // 模式徽章字号 px
-  modeOffsetY: -1,           // 模式/任务徽章整体偏移 px
+  modeOffsetY: 0,            // 模式/任务徽章整体偏移 px
 
   sidebarFontSize: 16,       // 左侧栏字号 px
 
