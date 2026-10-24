@@ -1,0 +1,50 @@
+{
+  "name": "dsh-line-height",
+  "version": "0.1.0",
+  "description": "Client-side DSH Web GUI theme: compact hover-revealed header tabs with a sliding indicator, feathered top edge, calmer typography and a wider transcript column.",
+  "type": "module",
+  "main": "lib/index.mjs",
+  "exports": {
+    ".": {
+      "default": "./lib/index.mjs"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "theme",
+    "ui",
+    "client-plugin"
+  ],
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CHANGE_ME/dsh-line-height.git"
+  },
+  "homepage": "https://github.com/CHANGE_ME/dsh-line-height#readme",
+  "bugs": {
+    "url": "https://github.com/CHANGE_ME/dsh-line-height/issues"
+  }
+}
