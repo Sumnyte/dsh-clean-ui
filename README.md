@@ -12,7 +12,6 @@
 > [兼容性](#兼容性) before installing.
 
 ![Header tabs with the thin 2px indicator](docs/header.png)
-![Live tuning panel: presets, top-button switches, sliders](docs/panel.png)
 
 ---
 
@@ -41,10 +40,9 @@
 - 视图 tab 平时隐藏，鼠标移入 header 才浮现（淡入 + 上浮 6px）
 - 当前 tab 用一条 **2px** 圆角蓝条指示：从中间伸长、在 tab 间滑动、移开时缩回
 - tab 水平垂直居中；窗口变窄到会和标题碰撞时自动淡出（按实测像素判定，不是固定断点）
-- 右上角五个工具按钮（`更多操作`、`打开右侧边栏`、`分栏`、`全屏`、`收起右侧边栏`）可**逐项**
-  勾选显示/隐藏，像底部状态行一样；另有总开关隐藏「展开底部面板」「上下文诊断」两个按钮
-- 隐藏「更多会话视图」按钮、rc.3 新增的侧栏「更多」项，以及「在文件资源管理器中打开 /
-  更多打开方式」这组顶部工具
+- 右上角五个工具按钮（`文件资源管理器（含更多打开方式）`、`更多操作`、`打开右侧边栏`、
+  `展开底部面板`、`上下文诊断`）可**逐项**勾选显示/隐藏，像底部状态行一样
+- 隐藏「更多会话视图」按钮、rc.3 新增的侧栏「更多」项
 
 > **tab 来源**：`对话` / `轨迹` 由 DSH 自带；`上下文` / `编队` 是 **`dsh-context`** 插件注册的。
 > 本插件只负责把整条 tab 条隐藏/浮现，不区分 tab 来自哪个插件；没装 `dsh-context` 时自然只会看到前两个。
@@ -118,7 +116,7 @@ var CONFIG = {
   stats: { speed: true, cache: true, context: true },
 
   /* 右上角五个工具按钮：true = 显示，false = 隐藏 */
-  topButtons: { more: true, sidebar: true, split: true, full: true, collapse: true },
+  topButtons: { explorer: true, more: true, sidebar: true, bottomPanel: true, diagnostics: true },
 
   features: {
     hoverTabs: true,         // 平时隐藏 tab，悬停 header 才浮现
@@ -127,7 +125,6 @@ var CONFIG = {
     widerColumn: true,       // 加宽正文列
     sidebarFont: true,       // 放大侧栏字号
     hideStats: true,         // 隐藏整行底部状态行
-    hideHeaderButtons: true, // 隐藏「展开底部面板」「上下文诊断」
     hidePtcChip: true,       // 隐藏「PTC 模式」等徽章
     hideViewMore: true,      // 隐藏会话视图「更多」
     hideMoreNav: true,       // 隐藏 rc.3 侧栏「更多」
@@ -156,9 +153,9 @@ var CONFIG = {
 
 **顶部按钮**那一段是逐项开关（勾选 = 显示）：
 
-- `更多操作`、`打开右侧边栏`、`分栏`、`全屏`、`收起右侧边栏`
+- `文件资源管理器（含更多打开方式）`、`更多操作`、`打开右侧边栏`、`展开底部面板`、`上下文诊断`
 - 全部可以只留其中几个；隐藏「打开右侧边栏」后，仍可用 `Ctrl+Alt+L` 打开面板把它勾回来
-- `分栏` / `全屏` / `收起右侧边栏` 来自右侧栏的 chrome，只在右侧栏打开时出现
+- 这五个就是会话标题右侧那一排按钮；右侧栏自己的 `分栏` / `全屏` / `收起` 不在这组里，别混淆
 
 ### 兼容性
 
@@ -168,7 +165,7 @@ var CONFIG = {
 - 插件靠宿主 DOM 工作：`data-slot`、`data-composer-*`、`data-conversation-*` 等属性，
   以及 `_markdown_`、`headerActions`、`headerUtilities`、`_split` 等类名后缀。宿主改结构或改文案时，
   对应功能可能**静默失效**（不会报错，也不会卡住页面）
-- 右上角五个按钮和「展开底部面板」「文件资源管理器」这类隐藏都按**中文可访问名**匹配；非中文界面可能不生效
+- 顶部五个按钮（含文件夹 / 更多打开方式）按**中文可访问名**匹配；非中文界面可能不生效
 - 状态行依赖宿主的两块统计（`activity` / `usage`）和末尾的上下文占用环；宿主调整统计结构时会失效
 
 ### 已知限制
@@ -208,8 +205,9 @@ DOM-level theme; a host redesign can break individual features silently.
 
 **Header, tabs and composer**
 
-- The five top-right utilities — `更多操作`, `打开右侧边栏`, `分栏`, `全屏`, `收起右侧边栏` —
-  each have a show/hide checkbox in the panel.
+- The five top-right utilities — `文件资源管理器（含更多打开方式）`, `更多操作`,
+  `打开右侧边栏`, `展开底部面板`, `上下文诊断` — each have a show/hide checkbox in the panel.
+  The right sidebar's own `分栏` / `全屏` / `收起` are not part of this group.
 - Tabs: `对话` / `轨迹` are DSH's own; `上下文` / `编队` are registered by **`dsh-context`**.
   The hover-hide applies to the whole strip, third-party tabs included; without dsh-context only
   the first two exist.
