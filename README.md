@@ -93,7 +93,7 @@ var CONFIG = {
   headerHeight: 50,          // 顶部栏高度 px
   titleSize: 17,             // 会话标题字号 px
   headerPaddingTop: 14,      // 顶部栏内容整体下移 px
-  tabOffsetY: 4,             // tab 条额外垂直微调 px
+  tabOffsetY: 8,             // tab 条额外垂直微调 px
 
   tabFontSize: 14,           // tab 字号 px
   tabColor: "#5b6169",       // tab 常态颜色
