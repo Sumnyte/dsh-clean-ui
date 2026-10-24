@@ -54,8 +54,8 @@
 ### 安装
 
 ```sh
-# 需要先按 DSH 的插件方式安装（把 <owner> 换成仓库地址）
-dsh plugin --profile desktop add github:<owner>/dsh-line-height
+# 需要先按 DSH 的插件方式安装
+dsh plugin --profile desktop add github:Sumnyte/dsh-line-height
 ```
 
 或本地链接安装（改代码即时生效，但**需要重启 DSH**）：
@@ -192,7 +192,7 @@ DOM-level theme; a host redesign can break individual features silently.
 **Install**
 
 ```sh
-dsh plugin --profile desktop add github:<you>/dsh-line-height
+dsh plugin --profile desktop add github:Sumnyte/dsh-line-height
 ```
 
 **Restart DSH fully** (tray → quit) after installing or editing — client plugins are bundled at startup.

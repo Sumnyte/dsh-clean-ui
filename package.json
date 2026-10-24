@@ -40,5 +40,13 @@
     "client-plugin",
     "preset"
   ],
-  "author": "dsh-line-height contributors"
+  "author": "dsh-line-height contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sumnyte/dsh-line-height.git"
+  },
+  "homepage": "https://github.com/Sumnyte/dsh-line-height#readme",
+  "bugs": {
+    "url": "https://github.com/Sumnyte/dsh-line-height/issues"
+  }
 }
