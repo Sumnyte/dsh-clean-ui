@@ -99,6 +99,7 @@ var CONFIG = {
   tabColor: "#5b6169",       // tab 常态颜色
   barHeight: 2,              // 滑动指示条高度 px
   tabRise: 6,                // 浮现时上浮距离 px
+  modeFontSize: 14,          // 模式徽章字号 px
 
   sidebarFontSize: 16,       // 左侧栏字号 px
 
