@@ -128,6 +128,7 @@ var CONFIG = {
     sidebarFont: true,       // 放大侧栏字号
     hideStats: true,         // 隐藏整行底部状态行
     hidePtcChip: true,       // 隐藏「PTC 模式」「创造模式」「标准模式」等徽章
+    hideTaskChip: false,     // 隐藏「N 个后台任务运行中」徽章
     hideViewMore: true,      // 隐藏会话视图「更多」
     hideMoreNav: true,       // 隐藏 rc.3 侧栏「更多」
     composerWidth: true      // 输入卡与正文列同宽
@@ -154,6 +155,8 @@ var CONFIG = {
 - 隐藏时下留白 —— 隐藏状态行时输入卡到底部的距离（默认 8px，可 0–30）
 - 输入框高度 —— 发送框输入区的最小高度（默认 72px，可 36–160）；调大后输入卡会变高
 - 隐藏模式徽章 —— 隐藏「PTC 模式」「创造模式」「标准模式」等徽章；取消勾选即显示
+- 隐藏后台任务 —— 「N 个后台任务运行中」单独开关；鼠标移到 header 显示 tab 时，
+  模式徽章和任务徽章会暂时让位隐藏，tab 收起后恢复
 
 **顶部按钮**那一段是逐项开关（勾选 = 显示）：
 
@@ -218,7 +221,9 @@ DOM-level theme; a host redesign can break individual features silently.
 - The composer card is measured against the transcript column and kept at the same width; the
   panel has an "输入框与正文同宽" toggle.
 - The composer input's minimum height is tunable in the panel ("输入框高度", 36–160px, default 72).
-- Mode badges (`PTC 模式`, `创造模式`, `标准模式`) can be hidden or shown with "隐藏模式徽章".
+- Mode badges (`PTC 模式`, `创造模式`, `标准模式`) can be hidden or shown with "隐藏模式徽章";
+  the `N 个后台任务运行中` chip has its own "隐藏后台任务" switch. Both hide while the tab strip
+  is revealed on header hover, and return when it retracts.
 - The tab indicator is 2px (tunable via `barHeight`).
 
 **Install**
