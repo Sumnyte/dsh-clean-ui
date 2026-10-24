@@ -25,7 +25,7 @@
 **预设**
 
 - **默认外观**：插件完全不动样式，只保留 `Ctrl+Alt+L` 面板——相当于"恢复用户原来的样子"
-- **作者预设**：作者调过的一整套参数（42px 顶栏、1.65 行高、280 字重、980px 正文列等）
+- **作者预设**：作者调过的一整套参数（42px 顶栏、1.65 行高、370 字重、980px 正文列等）
 - **自定义**：你在面板里拖出来的参数；拖任意滑块后自动归到这里
 - 切换预设会刷新一次页面（见[已知限制](#已知限制)）
 
@@ -110,6 +110,7 @@ var CONFIG = {
 
   composerGap: 8,            // 隐藏状态行时：输入卡到底部的留白 px
   statsRowGap: 12,           // 显示状态行时：它上下的对称留白 px
+  composerHeight: 72,        // 输入区最小高度 px
 
   /* 底部状态行：features.hideStats = true 时整行隐藏；否则只显示
      stats 里勾选的项，三项全不选也等于隐藏整行。 */
@@ -139,7 +140,7 @@ var CONFIG = {
 配置保存在本机 `localStorage`。面板顶部是**预设**行：
 
 - **默认外观** —— 插件不做任何改动（只保留这个面板），等于安装前的 DSH
-- **作者预设** —— 作者调过的一整套参数（42px 顶栏、1.65 行高、280 字重、980px 正文列……）
+- **作者预设** —— 作者调过的一整套参数（42px 顶栏、1.65 行高、370 字重、980px 正文列……）
 - **自定义** —— 你自己的参数；拖动任意滑块后会自动归到这里
 
 切换预设会刷新页面，因为只有重载才能干净地撤掉已经写进 DOM 的内联样式。状态行那一段是：
@@ -150,6 +151,7 @@ var CONFIG = {
 - 状态行上下留白 —— 显示状态行时的单参数滑块：它上面（与输入卡之间）和下面（到窗口底）
   的留白保持相等（默认 12px，可 0–40）
 - 隐藏时下留白 —— 隐藏状态行时输入卡到底部的距离（默认 8px，可 0–30）
+- 输入框高度 —— 发送框输入区的最小高度（默认 72px，可 36–160）；调大后输入卡会变高
 
 **顶部按钮**那一段是逐项开关（勾选 = 显示）：
 
@@ -199,7 +201,7 @@ DOM-level theme; a host redesign can break individual features silently.
 
 - **默认外观 / Stock** — the plugin does nothing (panel only); this is the pre-install DSH look
 - **作者预设 / Author** — the tuned snapshot the plugin was built with (42px header, 1.65 line
-  height, 280 body weight, 980px transcript, etc.)
+  height, 370 body weight, 980px transcript, 72px composer input, etc.)
 - **自定义 / Custom** — your own values; moving any slider switches to this
 - Switching presets reloads the page: only a reload removes every inline tweak cleanly
 
@@ -213,6 +215,7 @@ DOM-level theme; a host redesign can break individual features silently.
   the first two exist.
 - The composer card is measured against the transcript column and kept at the same width; the
   panel has an "输入框与正文同宽" toggle.
+- The composer input's minimum height is tunable in the panel ("输入框高度", 36–160px, default 72).
 - The tab indicator is 2px (tunable via `barHeight`).
 
 **Install**
