@@ -11,6 +11,17 @@
 > DOM-level theme, so a host redesign can break individual features silently. Read
 > [兼容性](#兼容性) before installing.
 
+**一句话**：把 DSH 的 Web GUI 收紧一档——更紧凑的顶栏、悬停才出现的 tab、可调排版和输入区、
+可逐项隐藏的右上角按钮与底部状态行，并带「默认 / 作者 / 自定义」预设。
+
+**主要功能**
+
+- **顶栏**：高度可调，tab 悬停浮现，2px 滑动指示条；右上角五个工具按钮可逐项显示/隐藏
+- **排版**：正文行高、正文字重、标题/加粗字重、正文列最大宽度与占父宽比例
+- **输入区**：输入卡与正文同宽，输入框最小高度可调；底部状态行可整行隐藏或只留任意几项
+- **模式徽章**：`PTC 模式` / `创造模式` / `标准模式` / 后台任务徽章可显示/隐藏，15px，tab 浮现时渐隐
+- **预设**：默认外观（完全不动样式）/ 作者预设 / 自定义；`Ctrl+Alt+L` 打开实时调参面板，配置存本机
+
 ![Header tabs with the thin 2px indicator](docs/header.png)
 
 ---
