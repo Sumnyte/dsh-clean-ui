@@ -22,8 +22,14 @@
 - **模式徽章**：`PTC 模式` / `创造模式` / `标准模式` / 后台任务徽章可显示/隐藏，15px，tab 浮现时渐隐
 - **预设**：默认外观（完全不动样式）/ 作者预设 / 自定义；`Ctrl+Alt+L` 打开实时调参面板，配置存本机
 
-![整体效果：浅色主题、隐藏 tab 时的 header 与输入区](docs/overview.png)
-![深色主题：同一套布局和可调参数](docs/overview-dark.png)
+<p align="center">
+  <img src="docs/overview.png" width="860" alt="浅色主题整体效果"><br>
+  <sub>浅色主题 · 隐藏 tab 时的 header 与输入区</sub>
+</p>
+<p align="center">
+  <img src="docs/overview-dark.png" width="860" alt="深色主题整体效果"><br>
+  <sub>深色主题 · 同一套布局与可调参数</sub>
+</p>
 
 ---
 
@@ -59,7 +65,10 @@
 > **tab 来源**：`对话` / `轨迹` 由 DSH 自带；`上下文` / `编队` 是 **`dsh-context`** 插件注册的。
 > 本插件只负责把整条 tab 条隐藏/浮现，不区分 tab 来自哪个插件；没装 `dsh-context` 时自然只会看到前两个。
 
-![tab 条悬停时浮现：对话/轨迹/上下文/编队 + 2px 蓝条](docs/tabs.png)
+<p align="center">
+  <img src="docs/tabs.png" width="760" alt="tab 悬停时浮现"><br>
+  <sub>tab 悬停浮现 · 对话 / 轨迹 / 上下文 / 编队 + 2px 蓝条</sub>
+</p>
 
 **侧栏 / 输入区**
 
@@ -69,8 +78,14 @@
 - 对话正文列可调宽（最大宽度 + 占父宽比例）
 - **输入框与正文同宽**：输入卡的最大宽度跟随正文列实时测量，两者边缘对齐；可在面板里关掉
 
-![隐藏底部状态行时的输入区](docs/composer-nostatus.png)
-![只保留上下文占比的状态行](docs/composer-status.png)
+<p align="center">
+  <img src="docs/composer-nostatus.png" width="700" alt="隐藏底部状态行"><br>
+  <sub>隐藏底部状态行</sub>
+</p>
+<p align="center">
+  <img src="docs/composer-status.png" width="700" alt="只保留上下文占比的状态行"><br>
+  <sub>只保留上下文占比的状态行</sub>
+</p>
 
 ### 安装
 
@@ -163,8 +178,14 @@ var CONFIG = {
 - **作者预设** —— 作者调过的一整套参数（42px 顶栏、1.65 行高、370 字重、980px 正文列……）
 - **自定义** —— 你自己的参数；拖动任意滑块后会自动归到这里
 
-![调参面板（上半）：预设、顶部按钮、滑块](docs/panel-top.png)
-![调参面板（下半）：开关、状态行、恢复默认](docs/panel-bottom.png)
+<p align="center">
+  <img src="docs/panel-top.png" width="380" alt="调参面板上半"><br>
+  <sub>调参面板上半 · 预设 / 顶部按钮 / 滑块</sub>
+</p>
+<p align="center">
+  <img src="docs/panel-bottom.png" width="380" alt="调参面板下半"><br>
+  <sub>调参面板下半 · 开关 / 状态行 / 默认按钮</sub>
+</p>
 
 切换预设会刷新页面，因为只有重载才能干净地撤掉已经写进 DOM 的内联样式。状态行那一段是：
 
