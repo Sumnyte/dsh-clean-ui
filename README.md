@@ -23,11 +23,11 @@
 - **预设**：默认外观（完全不动样式）/ 作者预设 / 自定义；`Ctrl+Alt+L` 打开实时调参面板，配置存本机
 
 <p align="center">
-  <img src="docs/overview.png" width="860" alt="浅色主题整体效果"><br>
+  <img src="docs/overview.png?v=3" width="860" alt="浅色主题整体效果"><br>
   <sub>浅色主题 · 隐藏 tab 时的 header 与输入区</sub>
 </p>
 <p align="center">
-  <img src="docs/overview-dark.png" width="860" alt="深色主题整体效果"><br>
+  <img src="docs/overview-dark.png?v=3" width="860" alt="深色主题整体效果"><br>
   <sub>深色主题 · 同一套布局与可调参数</sub>
 </p>
 
@@ -66,7 +66,7 @@
 > 本插件只负责把整条 tab 条隐藏/浮现，不区分 tab 来自哪个插件；没装 `dsh-context` 时自然只会看到前两个。
 
 <p align="center">
-  <img src="docs/tabs.png" width="760" alt="tab 悬停时浮现"><br>
+  <img src="docs/tabs.png?v=3" width="760" alt="tab 悬停时浮现"><br>
   <sub>tab 悬停浮现 · 对话 / 轨迹 / 上下文 / 编队 + 2px 蓝条</sub>
 </p>
 
@@ -79,11 +79,11 @@
 - **输入框与正文同宽**：输入卡的最大宽度跟随正文列实时测量，两者边缘对齐；可在面板里关掉
 
 <p align="center">
-  <img src="docs/composer-nostatus.png" width="700" alt="隐藏底部状态行"><br>
+  <img src="docs/composer-nostatus.png?v=3" width="700" alt="隐藏底部状态行"><br>
   <sub>隐藏底部状态行</sub>
 </p>
 <p align="center">
-  <img src="docs/composer-status.png" width="700" alt="只保留上下文占比的状态行"><br>
+  <img src="docs/composer-status.png?v=3" width="700" alt="只保留上下文占比的状态行"><br>
   <sub>只保留上下文占比的状态行</sub>
 </p>
 
@@ -179,11 +179,11 @@ var CONFIG = {
 - **自定义** —— 你自己的参数；拖动任意滑块后会自动归到这里
 
 <p align="center">
-  <img src="docs/panel-top.png" width="380" alt="调参面板上半"><br>
+  <img src="docs/panel-top.png?v=3" width="380" alt="调参面板上半"><br>
   <sub>调参面板上半 · 预设 / 顶部按钮 / 滑块</sub>
 </p>
 <p align="center">
-  <img src="docs/panel-bottom.png" width="380" alt="调参面板下半"><br>
+  <img src="docs/panel-bottom.png?v=3" width="380" alt="调参面板下半"><br>
   <sub>调参面板下半 · 开关 / 状态行 / 默认按钮</sub>
 </p>
 
