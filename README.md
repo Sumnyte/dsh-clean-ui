@@ -43,7 +43,7 @@
 **预设**
 
 - **默认外观**：插件完全不动样式，只保留 `Ctrl+Alt+L` 面板——相当于"恢复用户原来的样子"
-- **作者预设**：作者调过的一整套参数（42px 顶栏、1.65 行高、370 字重、980px 正文列等）
+- **作者预设**：作者调过的一整套参数（42px 顶栏、1.65 行高、370 字重、980px 正文列，显示底部状态行）
 - **自定义**：你在面板里拖出来的参数；拖任意滑块后自动归到这里
 - 切换预设会刷新一次页面（见[已知限制](#已知限制)）
 
@@ -175,7 +175,7 @@ var CONFIG = {
 配置保存在本机 `localStorage`。面板顶部是**预设**行：
 
 - **默认外观** —— 插件不做任何改动（只保留这个面板），等于安装前的 DSH
-- **作者预设** —— 作者调过的一整套参数（42px 顶栏、1.65 行高、370 字重、980px 正文列……）
+- **作者预设** —— 作者调过的一整套参数（42px 顶栏、1.65 行高、370 字重、980px 正文列，显示底部状态行……）
 - **自定义** —— 你自己的参数；拖动任意滑块后会自动归到这里
 
 <p align="center">
@@ -189,7 +189,7 @@ var CONFIG = {
 
 切换预设会刷新页面，因为只有重载才能干净地撤掉已经写进 DOM 的内联样式。状态行那一段是：
 
-- ☑ 隐藏整行 —— 勾上就整行隐藏（作者预设默认隐藏）
+- ☑ 隐藏整行 —— 勾上就整行隐藏（当前作者预设显示状态行）
 - 不隐藏时显示：`输出速度 tok/s`、`缓存命中率`、`上下文占比`，任选若干项；
   三项全部不勾等于隐藏整行
 - 状态行上下留白 —— 显示状态行时的单参数滑块：它上面（与输入卡之间）和下面（到窗口底）
@@ -248,7 +248,7 @@ DOM-level theme; a host redesign can break individual features silently.
 
 - **默认外观 / Stock** — the plugin does nothing (panel only); this is the pre-install DSH look
 - **作者预设 / Author** — the tuned snapshot the plugin was built with (42px header, 1.65 line
-  height, 370 body weight, 980px transcript, 72px composer input, etc.)
+  height, 370 body weight, 980px transcript, 62px composer input, composer status row visible)
 - **自定义 / Custom** — your own values; moving any slider switches to this
 - Switching presets reloads the page: only a reload removes every inline tweak cleanly
 
