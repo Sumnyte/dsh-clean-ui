@@ -1,6 +1,6 @@
 {
   "name": "dsh-clean-ui",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "description": "Cleaner client-side UI theme for the DSH Web GUI, with presets: compact header, hover tabs, tunable typography, composer width and height, selectable status row and per-button header hiding.",
   "type": "module",
   "main": "lib/index.mjs",
