@@ -20,7 +20,7 @@
 - **排版**：正文行高、正文字重、标题/加粗字重、正文列最大宽度与占父宽比例
 - **输入区**：输入卡与正文同宽，输入框最小高度可调；底部状态行可整行隐藏或只留任意几项
 - **模式徽章**：`PTC 模式` / `创造模式` / `标准模式` / 后台任务徽章可显示/隐藏，15px，tab 浮现时渐隐
-- **预设**：默认外观（完全不动样式）/ 作者预设 / 自定义；`Ctrl+Alt+L` 打开实时调参面板，配置存本机
+- **预设**：默认外观（完全不动样式）/ 作者预设 / 自定义；`Ctrl+Shift+L` 打开实时调参面板，配置存本机
 
 <p align="center">
   <img src="docs/overview.png?v=3" width="860" alt="浅色主题整体效果"><br>
@@ -42,7 +42,7 @@
 
 **预设**
 
-- **默认外观**：插件完全不动样式，只保留 `Ctrl+Alt+L` 面板——相当于"恢复用户原来的样子"
+- **默认外观**：插件完全不动样式，只保留 `Ctrl+Shift+L` 面板——相当于"恢复用户原来的样子"
 - **作者预设**：作者调过的一整套参数（42px 顶栏、1.65 行高、370 字重、980px 正文列，显示底部状态行）
 - **自定义**：你在面板里拖出来的参数；拖任意滑块后自动归到这里
 - 切换预设会刷新一次页面（见[已知限制](#已知限制)）
@@ -171,7 +171,7 @@ var CONFIG = {
 
 不想要某个效果，把对应的 `features` 开关设成 `false` 即可；想调数值就改上面的常量。
 
-常用开关不必改代码：在 GUI 里按 **`Ctrl+Alt+L`** 打开浮动面板，拖动滑块 / 勾选复选框即时生效；
+常用开关不必改代码：在 GUI 里按 **`Ctrl+Shift+L`** 打开浮动面板，拖动滑块 / 勾选复选框即时生效；
 配置保存在本机 `localStorage`。面板顶部是**预设**行：
 
 - **默认外观** —— 插件不做任何改动（只保留这个面板），等于安装前的 DSH
@@ -203,7 +203,7 @@ var CONFIG = {
 **顶部按钮**那一段是逐项开关（勾选 = 显示）：
 
 - `文件资源管理器（含更多打开方式）`、`更多操作`、`打开右侧边栏`、`展开底部面板`、`上下文诊断`
-- 全部可以只留其中几个；隐藏「打开右侧边栏」后，仍可用 `Ctrl+Alt+L` 打开面板把它勾回来
+- 全部可以只留其中几个；隐藏「打开右侧边栏」后，仍可用 `Ctrl+Shift+L` 打开面板把它勾回来
 - 这五个就是会话标题右侧那一排按钮；右侧栏自己的 `分栏` / `全屏` / `收起` 不在这组里，别混淆
 
 ### 兼容性
@@ -244,7 +244,7 @@ author's look, or your own tuning.
 **Status: 0.2.x beta.** Built and tested against DSH `0.2.1-rc.3` on Windows only. This is a
 DOM-level theme; a host redesign can break individual features silently.
 
-**Presets** (panel: `Ctrl+Alt+L`)
+**Presets** (panel: `Ctrl+Shift+L`)
 
 - **默认外观 / Stock** — the plugin does nothing (panel only); this is the pre-install DSH look
 - **作者预设 / Author** — the tuned snapshot the plugin was built with (42px header, 1.65 line
